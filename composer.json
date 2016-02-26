@@ -12,6 +12,8 @@
     ],
     "require": {
         "php": ">=5.5.0",
+        "hassankhan/config": "0.10.0",
+        "symfony/yaml": "~2.5",
         "filp/whoops": ">=1.1.2",
         "patricklouys/http": ">=1.1.0",
         "nikic/fast-route": "*",
