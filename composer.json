@@ -23,7 +23,8 @@
     },
     "autoload": {
         "psr-4": {
-            "PHPDatastream\\": "src/"
+            "PHPDatastream\\": "src/",
+            "Dataworks\\Enterprise\\": "vendor/Dataworks/Enterprise"
         }
     }
 }
