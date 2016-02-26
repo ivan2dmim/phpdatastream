@@ -1,0 +1,29 @@
+{
+    "name": "phpdatastream",
+    "description": "PHP interface to the Thomson Dataworks Enterprise SOAP API",
+    "keywords": ["php", "soap", "datastream", "wdsl"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ivan Moretti",
+            "email": "ivan@dmim.ch",
+            "role": "Creator / Main Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "filp/whoops": ">=1.1.2",
+        "patricklouys/http": ">=1.1.0",
+        "nikic/fast-route": "*",
+        "rdlowrey/auryn": "1.1.0",
+        "mustache/mustache": "2.9.0"
+    },
+    "require-dev": {
+        "wsdl2phpgenerator/wsdl2phpgenerator": ">=3"
+    },
+    "autoload": {
+        "psr-4": {
+            "PHPDatastream\\": "src/"
+        }
+    }
+}
