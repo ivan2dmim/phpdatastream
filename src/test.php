@@ -70,6 +70,8 @@ $naValue = '';
 // $series = 'ASX200I';
 // $dataTypes = 'RI';
 $series = 'MSWRLD$(PI),SWISSMI(PI),ASX200I(PI)';
+$series = 'MSWRLD$(PI#S),SWISSMI(PI#S),ASX200I(PI#S)';
+$series = 'MAX#(FTSE100,-30D,)';
 $dataTypes = '';
 // $startDate = '2016-02-13';
 // $endDate = '2016-02-23';
@@ -79,7 +81,7 @@ $naValue = 'NaN';
 
 $builder = new ExpressionBuilder($series, $dataTypes, $startDate, $endDate, $frequency, $naValue);
 $request->setInstrument($builder->getInstrument());
-// var_dump($builder->getInstrument(),$builder->getSymbols());die;
+//var_dump($builder->getInstrument(),$builder->getSymbols());die;
 // $request->setSymbolSet($SymbolSet)
 
 try {
@@ -99,13 +101,20 @@ try {
         
         $xmlRecord = new \SimpleXMLElement($record->getAny());
         
-        if ($xmlRecord->StatusType->__toString() == \Dataworks\Enterprise\StatusType::Connected) {
+        $ns = $xmlRecord->getNamespaces(true);
+        if (count($ns)) {
+            echo "Error: " . $xmlRecord->children(current($ns))->Description->__toString() . "\n";
+            return false;
+        }
+        
+        if ($xmlRecord->StatusType->__toString() != \Dataworks\Enterprise\StatusType::Connected) {
+            echo "Error: " . $xmlRecord->StatusMessage->__toString() . "\n";
+            return false;
+        } else {
             // process results
             if ($echoData) {
                 echo $record->getAny();
             }
-        } else {
-            echo $xmlRecord->StatusMessage->__toString();
         }
     } else {
         $parameters = new \Dataworks\Enterprise\RequestRecord($user, $request, 0);
